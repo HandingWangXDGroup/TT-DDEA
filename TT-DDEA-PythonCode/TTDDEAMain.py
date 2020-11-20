@@ -91,10 +91,9 @@ if __name__ == '__main__':
     ga = GA(pop_size=100, dimension=dimension, lower_bound=lower_bound, upper_bound=upper_bound)
     ga.init_Population()
     for i in range(max_iter):
-        # print('iterator:', i)
         updatemodel(ga.pop)
-        ga.crossover(ga.pc)  # 交配
-        ga.mutation(ga.pm)  # 变异
+        ga.crossover(ga.pc)  
+        ga.mutation(ga.pm) 
         ga.pop = np.unique(ga.pop, axis=0)
         for j in range(0, 3):
             temp = model[j].predict(ga.pop)
@@ -103,7 +102,7 @@ if __name__ == '__main__':
             else:
                 fit_value = fit_value + temp
         fit_value = fit_value.reshape((len(ga.pop), 1))
-        ga.selection(fit_value)  # 选择
+        ga.selection(fit_value)  
         resetmodel(x,y)
 
     optimum = ga.first[-1]
